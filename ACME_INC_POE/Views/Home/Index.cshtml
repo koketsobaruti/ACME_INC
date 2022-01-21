@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<br />
+<br />
+<div id="container" style="background-color:whitesmoke;">
+    <div id="imageDiv">
+        <img src="~/Images/pexels-michelle-leman-6774880.jpg" alt="makeup" style="max-width:600px; max-height:600px" id="image">
+    </div>
+
+    <div id="text">
+        <p style="font-size:90px; color:burlywood;">ACME INC</p>
+        <br />
+        <br />
+        <p style="font-size: 45px; color:mediumpurple;">Check out our fashion <br />products.</p>
+    </div>
+</div>
+
+<hr />
+<ul style="list-style:none;" class="row">
+
+
+    @foreach (var item in Model)
+    {
+        <li class="col-md-4">
+            <form method="post" action="@Url.Action("ViewProduct", "Home")">
+                <br />
+                @{
+                    var base64 = Convert.ToBase64String(item.PRODUCT_IMAGE);
+                    var imgSrc = string.Format("data:image/jpg;base64,{0}", base64);
+                }
+                <img src='@imgSrc' style="max-width:400px; max-height:400px" />
+                <br />
+                <p id="text">@item.PRODUCT_NAME</p>
+                <input type="hidden" style="font-size:25px" name="id" value="@item.PRODUCT_ID" /><br />
+                <button class="btn btn-default" value="view" style="color:darkcyan;" type="submit">View Product</button>
+                <br />
+                <br />
+            </form>
+
+        </li>
+    }
+
+</ul>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0bfa10bbc82440aea07f2e706f6245d4" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_VC_PROG7311_188028607_Model.TBL_CUST_ADDRESSES" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_VC_PROG7311_188028607_Model.TBL_CUSTOMER" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_VC_PROG7311_188028607_Model.TBL_CUSTOMER_PAYMENT_DETAILS" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_VC_PROG7311_188028607_Model.TBL_EMPLOYEE" Width="1.5" PointX="5.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_VC_PROG7311_188028607_Model.TBL_PRODUCTS" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_VC_PROG7311_188028607_Model.TBL_PURCHASES" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
+        <AssociationConnector Association="DB_VC_PROG7311_188028607_Model.FK__TBL_CUST___CUST___5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_VC_PROG7311_188028607_Model.FK__TBL_CUSTO__CUST___60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_VC_PROG7311_188028607_Model.FK__TBL_PURCH__CUST___5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_VC_PROG7311_188028607_Model.FK__TBL_PURCH__PRODU__5CD6CB2B" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

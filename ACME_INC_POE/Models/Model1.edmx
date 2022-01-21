@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_VC_PROG7311_188028607_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBL_CUST_ADDRESSES">
+          <Key>
+            <PropertyRef Name="CUST_USERNAME" />
+          </Key>
+          <Property Name="CUST_USERNAME" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CUST_ADDRESS" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_CUSTOMER">
+          <Key>
+            <PropertyRef Name="CUST_USERNAME" />
+          </Key>
+          <Property Name="CUST_USERNAME" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CUST_PASSWORD" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_CUSTOMER_PAYMENT_DETAILS">
+          <Key>
+            <PropertyRef Name="CUST_USERNAME" />
+          </Key>
+          <Property Name="CUST_USERNAME" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CUST_CARD_NUMBER" Type="int" Nullable="false" />
+          <Property Name="CUST_CVV" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_EMPLOYEE">
+          <Key>
+            <PropertyRef Name="EMP_USERNAME" />
+          </Key>
+          <Property Name="EMP_USERNAME" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="EMP_PASSWORD" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_PRODUCTS">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="PRODUCT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PRODUCT_NAME" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PRODUCT_TYPE" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PRODUCT_DESCRIPTION" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PRODUCT_PRICE" Type="numeric" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="PRODUCT_IMAGE" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_PURCHASES">
+          <Key>
+            <PropertyRef Name="CUST_USERNAME" />
+          </Key>
+          <Property Name="CUST_USERNAME" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PRODUCT_ID" Type="int" Nullable="false" />
+          <Property Name="PURCHASE_DATE" Type="date" Nullable="false" />
+          <Property Name="DELIVERY_DATE" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__TBL_CUST___CUST___5EBF139D">
+          <End Role="TBL_CUSTOMER" Type="Self.TBL_CUSTOMER" Multiplicity="1" />
+          <End Role="TBL_CUST_ADDRESSES" Type="Self.TBL_CUST_ADDRESSES" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_CUSTOMER">
+              <PropertyRef Name="CUST_USERNAME" />
+            </Principal>
+            <Dependent Role="TBL_CUST_ADDRESSES">
+              <PropertyRef Name="CUST_USERNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_CUSTO__CUST___60A75C0F">
+          <End Role="TBL_CUSTOMER" Type="Self.TBL_CUSTOMER" Multiplicity="1" />
+          <End Role="TBL_CUSTOMER_PAYMENT_DETAILS" Type="Self.TBL_CUSTOMER_PAYMENT_DETAILS" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_CUSTOMER">
+              <PropertyRef Name="CUST_USERNAME" />
+            </Principal>
+            <Dependent Role="TBL_CUSTOMER_PAYMENT_DETAILS">
+              <PropertyRef Name="CUST_USERNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_PURCH__CUST___5BE2A6F2">
+          <End Role="TBL_CUSTOMER" Type="Self.TBL_CUSTOMER" Multiplicity="1" />
+          <End Role="TBL_PURCHASES" Type="Self.TBL_PURCHASES" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_CUSTOMER">
+              <PropertyRef Name="CUST_USERNAME" />
+            </Principal>
+            <Dependent Role="TBL_PURCHASES">
+              <PropertyRef Name="CUST_USERNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_PURCH__PRODU__5CD6CB2B">
+          <End Role="TBL_PRODUCTS" Type="Self.TBL_PRODUCTS" Multiplicity="1" />
+          <End Role="TBL_PURCHASES" Type="Self.TBL_PURCHASES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="TBL_PURCHASES">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_VC_PROG7311_188028607_ModelStoreContainer">
+          <EntitySet Name="TBL_CUST_ADDRESSES" EntityType="Self.TBL_CUST_ADDRESSES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_CUSTOMER" EntityType="Self.TBL_CUSTOMER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_CUSTOMER_PAYMENT_DETAILS" EntityType="Self.TBL_CUSTOMER_PAYMENT_DETAILS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_EMPLOYEE" EntityType="Self.TBL_EMPLOYEE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_PRODUCTS" EntityType="Self.TBL_PRODUCTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_PURCHASES" EntityType="Self.TBL_PURCHASES" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__TBL_CUST___CUST___5EBF139D" Association="Self.FK__TBL_CUST___CUST___5EBF139D">
+            <End Role="TBL_CUSTOMER" EntitySet="TBL_CUSTOMER" />
+            <End Role="TBL_CUST_ADDRESSES" EntitySet="TBL_CUST_ADDRESSES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_CUSTO__CUST___60A75C0F" Association="Self.FK__TBL_CUSTO__CUST___60A75C0F">
+            <End Role="TBL_CUSTOMER" EntitySet="TBL_CUSTOMER" />
+            <End Role="TBL_CUSTOMER_PAYMENT_DETAILS" EntitySet="TBL_CUSTOMER_PAYMENT_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_PURCH__CUST___5BE2A6F2" Association="Self.FK__TBL_PURCH__CUST___5BE2A6F2">
+            <End Role="TBL_CUSTOMER" EntitySet="TBL_CUSTOMER" />
+            <End Role="TBL_PURCHASES" EntitySet="TBL_PURCHASES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_PURCH__PRODU__5CD6CB2B" Association="Self.FK__TBL_PURCH__PRODU__5CD6CB2B">
+            <End Role="TBL_PRODUCTS" EntitySet="TBL_PRODUCTS" />
+            <End Role="TBL_PURCHASES" EntitySet="TBL_PURCHASES" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_VC_PROG7311_188028607_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TBL_CUST_ADDRESSES">
+          <Key>
+            <PropertyRef Name="CUST_USERNAME" />
+          </Key>
+          <Property Name="CUST_USERNAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CUST_ADDRESS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TBL_CUSTOMER" Relationship="Self.FK__TBL_CUST___CUST___5EBF139D" FromRole="TBL_CUST_ADDRESSES" ToRole="TBL_CUSTOMER" />
+        </EntityType>
+        <EntityType Name="TBL_CUSTOMER">
+          <Key>
+            <PropertyRef Name="CUST_USERNAME" />
+          </Key>
+          <Property Name="CUST_USERNAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CUST_PASSWORD" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TBL_CUST_ADDRESSES" Relationship="Self.FK__TBL_CUST___CUST___5EBF139D" FromRole="TBL_CUSTOMER" ToRole="TBL_CUST_ADDRESSES" />
+          <NavigationProperty Name="TBL_CUSTOMER_PAYMENT_DETAILS" Relationship="Self.FK__TBL_CUSTO__CUST___60A75C0F" FromRole="TBL_CUSTOMER" ToRole="TBL_CUSTOMER_PAYMENT_DETAILS" />
+          <NavigationProperty Name="TBL_PURCHASES" Relationship="Self.FK__TBL_PURCH__CUST___5BE2A6F2" FromRole="TBL_CUSTOMER" ToRole="TBL_PURCHASES" />
+        </EntityType>
+        <EntityType Name="TBL_CUSTOMER_PAYMENT_DETAILS">
+          <Key>
+            <PropertyRef Name="CUST_USERNAME" />
+          </Key>
+          <Property Name="CUST_USERNAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CUST_CARD_NUMBER" Type="Int32" Nullable="false" />
+          <Property Name="CUST_CVV" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TBL_CUSTOMER" Relationship="Self.FK__TBL_CUSTO__CUST___60A75C0F" FromRole="TBL_CUSTOMER_PAYMENT_DETAILS" ToRole="TBL_CUSTOMER" />
+        </EntityType>
+        <EntityType Name="TBL_EMPLOYEE">
+          <Key>
+            <PropertyRef Name="EMP_USERNAME" />
+          </Key>
+          <Property Name="EMP_USERNAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMP_PASSWORD" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_PRODUCTS">
+          <Key>
+            <PropertyRef Name="PRODUCT_ID" />
+          </Key>
+          <Property Name="PRODUCT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PRODUCT_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRODUCT_TYPE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRODUCT_DESCRIPTION" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRODUCT_PRICE" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="PRODUCT_IMAGE" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="TBL_PURCHASES" Relationship="Self.FK__TBL_PURCH__PRODU__5CD6CB2B" FromRole="TBL_PRODUCTS" ToRole="TBL_PURCHASES" />
+        </EntityType>
+        <EntityType Name="TBL_PURCHASES">
+          <Key>
+            <PropertyRef Name="CUST_USERNAME" />
+          </Key>
+          <Property Name="CUST_USERNAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRODUCT_ID" Type="Int32" Nullable="false" />
+          <Property Name="PURCHASE_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DELIVERY_DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="TBL_CUSTOMER" Relationship="Self.FK__TBL_PURCH__CUST___5BE2A6F2" FromRole="TBL_PURCHASES" ToRole="TBL_CUSTOMER" />
+          <NavigationProperty Name="TBL_PRODUCTS" Relationship="Self.FK__TBL_PURCH__PRODU__5CD6CB2B" FromRole="TBL_PURCHASES" ToRole="TBL_PRODUCTS" />
+        </EntityType>
+        <Association Name="FK__TBL_CUST___CUST___5EBF139D">
+          <End Role="TBL_CUSTOMER" Type="Self.TBL_CUSTOMER" Multiplicity="1" />
+          <End Role="TBL_CUST_ADDRESSES" Type="Self.TBL_CUST_ADDRESSES" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_CUSTOMER">
+              <PropertyRef Name="CUST_USERNAME" />
+            </Principal>
+            <Dependent Role="TBL_CUST_ADDRESSES">
+              <PropertyRef Name="CUST_USERNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_CUSTO__CUST___60A75C0F">
+          <End Role="TBL_CUSTOMER" Type="Self.TBL_CUSTOMER" Multiplicity="1" />
+          <End Role="TBL_CUSTOMER_PAYMENT_DETAILS" Type="Self.TBL_CUSTOMER_PAYMENT_DETAILS" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_CUSTOMER">
+              <PropertyRef Name="CUST_USERNAME" />
+            </Principal>
+            <Dependent Role="TBL_CUSTOMER_PAYMENT_DETAILS">
+              <PropertyRef Name="CUST_USERNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_PURCH__CUST___5BE2A6F2">
+          <End Role="TBL_CUSTOMER" Type="Self.TBL_CUSTOMER" Multiplicity="1" />
+          <End Role="TBL_PURCHASES" Type="Self.TBL_PURCHASES" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_CUSTOMER">
+              <PropertyRef Name="CUST_USERNAME" />
+            </Principal>
+            <Dependent Role="TBL_PURCHASES">
+              <PropertyRef Name="CUST_USERNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_PURCH__PRODU__5CD6CB2B">
+          <End Role="TBL_PRODUCTS" Type="Self.TBL_PRODUCTS" Multiplicity="1" />
+          <End Role="TBL_PURCHASES" Type="Self.TBL_PURCHASES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_PRODUCTS">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Principal>
+            <Dependent Role="TBL_PURCHASES">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_VC_PROG7311_188028607_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBL_CUST_ADDRESSES" EntityType="Self.TBL_CUST_ADDRESSES" />
+          <EntitySet Name="TBL_CUSTOMER" EntityType="Self.TBL_CUSTOMER" />
+          <EntitySet Name="TBL_CUSTOMER_PAYMENT_DETAILS" EntityType="Self.TBL_CUSTOMER_PAYMENT_DETAILS" />
+          <EntitySet Name="TBL_EMPLOYEE" EntityType="Self.TBL_EMPLOYEE" />
+          <EntitySet Name="TBL_PRODUCTS" EntityType="Self.TBL_PRODUCTS" />
+          <EntitySet Name="TBL_PURCHASES" EntityType="Self.TBL_PURCHASES" />
+          <AssociationSet Name="FK__TBL_CUST___CUST___5EBF139D" Association="Self.FK__TBL_CUST___CUST___5EBF139D">
+            <End Role="TBL_CUSTOMER" EntitySet="TBL_CUSTOMER" />
+            <End Role="TBL_CUST_ADDRESSES" EntitySet="TBL_CUST_ADDRESSES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_CUSTO__CUST___60A75C0F" Association="Self.FK__TBL_CUSTO__CUST___60A75C0F">
+            <End Role="TBL_CUSTOMER" EntitySet="TBL_CUSTOMER" />
+            <End Role="TBL_CUSTOMER_PAYMENT_DETAILS" EntitySet="TBL_CUSTOMER_PAYMENT_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_PURCH__CUST___5BE2A6F2" Association="Self.FK__TBL_PURCH__CUST___5BE2A6F2">
+            <End Role="TBL_CUSTOMER" EntitySet="TBL_CUSTOMER" />
+            <End Role="TBL_PURCHASES" EntitySet="TBL_PURCHASES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_PURCH__PRODU__5CD6CB2B" Association="Self.FK__TBL_PURCH__PRODU__5CD6CB2B">
+            <End Role="TBL_PRODUCTS" EntitySet="TBL_PRODUCTS" />
+            <End Role="TBL_PURCHASES" EntitySet="TBL_PURCHASES" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_VC_PROG7311_188028607_ModelStoreContainer" CdmEntityContainer="DB_VC_PROG7311_188028607_Entities">
+          <EntitySetMapping Name="TBL_CUST_ADDRESSES">
+            <EntityTypeMapping TypeName="DB_VC_PROG7311_188028607_Model.TBL_CUST_ADDRESSES">
+              <MappingFragment StoreEntitySet="TBL_CUST_ADDRESSES">
+                <ScalarProperty Name="CUST_USERNAME" ColumnName="CUST_USERNAME" />
+                <ScalarProperty Name="CUST_ADDRESS" ColumnName="CUST_ADDRESS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_CUSTOMER">
+            <EntityTypeMapping TypeName="DB_VC_PROG7311_188028607_Model.TBL_CUSTOMER">
+              <MappingFragment StoreEntitySet="TBL_CUSTOMER">
+                <ScalarProperty Name="CUST_USERNAME" ColumnName="CUST_USERNAME" />
+                <ScalarProperty Name="CUST_PASSWORD" ColumnName="CUST_PASSWORD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_CUSTOMER_PAYMENT_DETAILS">
+            <EntityTypeMapping TypeName="DB_VC_PROG7311_188028607_Model.TBL_CUSTOMER_PAYMENT_DETAILS">
+              <MappingFragment StoreEntitySet="TBL_CUSTOMER_PAYMENT_DETAILS">
+                <ScalarProperty Name="CUST_USERNAME" ColumnName="CUST_USERNAME" />
+                <ScalarProperty Name="CUST_CARD_NUMBER" ColumnName="CUST_CARD_NUMBER" />
+                <ScalarProperty Name="CUST_CVV" ColumnName="CUST_CVV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_EMPLOYEE">
+            <EntityTypeMapping TypeName="DB_VC_PROG7311_188028607_Model.TBL_EMPLOYEE">
+              <MappingFragment StoreEntitySet="TBL_EMPLOYEE">
+                <ScalarProperty Name="EMP_USERNAME" ColumnName="EMP_USERNAME" />
+                <ScalarProperty Name="EMP_PASSWORD" ColumnName="EMP_PASSWORD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_PRODUCTS">
+            <EntityTypeMapping TypeName="DB_VC_PROG7311_188028607_Model.TBL_PRODUCTS">
+              <MappingFragment StoreEntitySet="TBL_PRODUCTS">
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="PRODUCT_NAME" ColumnName="PRODUCT_NAME" />
+                <ScalarProperty Name="PRODUCT_TYPE" ColumnName="PRODUCT_TYPE" />
+                <ScalarProperty Name="PRODUCT_DESCRIPTION" ColumnName="PRODUCT_DESCRIPTION" />
+                <ScalarProperty Name="PRODUCT_PRICE" ColumnName="PRODUCT_PRICE" />
+                <ScalarProperty Name="PRODUCT_IMAGE" ColumnName="PRODUCT_IMAGE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_PURCHASES">
+            <EntityTypeMapping TypeName="DB_VC_PROG7311_188028607_Model.TBL_PURCHASES">
+              <MappingFragment StoreEntitySet="TBL_PURCHASES">
+                <ScalarProperty Name="CUST_USERNAME" ColumnName="CUST_USERNAME" />
+                <ScalarProperty Name="PRODUCT_ID" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="PURCHASE_DATE" ColumnName="PURCHASE_DATE" />
+                <ScalarProperty Name="DELIVERY_DATE" ColumnName="DELIVERY_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
